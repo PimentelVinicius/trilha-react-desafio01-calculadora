@@ -49,6 +49,32 @@ const App = () => {
 
   }
 
+  const handleMultiNumbers = () => {
+
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('*')
+    }else{
+      const multi = Number(firstNumber) * Number(currentNumber)
+      setCurrentNumber(String(multi))
+      setOperation('')
+    }
+  }
+
+  const handleDivisionNumber = () => {
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('/')
+    }
+    else{
+      const Division = Number(firstNumber) / Number(currentNumber)
+      setCurrentNumber(String(Division))
+      setOperation('')
+    }
+  }
+
   const handleEquals = () => {
 
     if(firstNumber !== '0' && operation !== '' && currentNumber !== '0'){
@@ -58,6 +84,12 @@ const App = () => {
             break;
           case '-':
             handleMinusNumbers();
+            break;
+          case '*':
+            handleMultiNumbers();
+            break;
+          case '/':
+            handleDivisionNumber();
             break;
           default: 
             break;
@@ -71,10 +103,10 @@ const App = () => {
       <Content>
         <Input value={currentNumber}/>
         <Row>
-          <Button label="x"/>
-          <Button label="/"/>
+          <Button label="x" onClick={handleMultiNumbers}/>
+          <Button label="/" onClick={handleDivisionNumber}/>
           <Button label="c" onClick={handleOnClear}/>
-          <Button label="."/>
+          <Button label="React"/>
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')}/>
@@ -93,6 +125,12 @@ const App = () => {
           <Button label="2" onClick={() => handleAddNumber('2')}/>
           <Button label="3" onClick={() => handleAddNumber('3')}/>
           <Button label="=" onClick={handleEquals}/>
+        </Row>
+        <Row>
+         
+          <Button label="0" onClick={() => handleAddNumber('0')}/>
+
+         
         </Row>
       </Content>
     </Container>
